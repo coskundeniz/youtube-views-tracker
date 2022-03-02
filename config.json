@@ -3,5 +3,7 @@
     "channels": [
         "ArjanCodes",
         "coskundenize"
-    ]
+    ],
+    "output_type": "excel",
+    "output_file": "results.xlsx"
 }

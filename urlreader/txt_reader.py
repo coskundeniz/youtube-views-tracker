@@ -1,5 +1,6 @@
 import os
 
+from exceptions import UrlFileDoesNotExistError
 from utils import logger
 from urlreader.urlreader import UrlReader
 
@@ -13,7 +14,7 @@ class TxtReader(UrlReader):
 
     def __init__(self, filename: str) -> None:
 
-        self.filename = filename
+        self._filename = filename
 
     def read_urls(self) -> list:
         """Read urls from file
@@ -22,13 +23,13 @@ class TxtReader(UrlReader):
         :returns: List of video urls
         """
 
-        if not os.path.exists(self.filename):
-            logger.error(f"Url file {self.filename} does not exist!")
-            raise SystemExit()
+        if not os.path.exists(self._filename):
+            message = f"Url file {self._filename} does not exist!"
+            raise UrlFileDoesNotExistError(message)
 
         urls = []
-        with open(self.filename, encoding="utf-8") as urlsfile:
-            logger.info(f"Reading video urls from {self.filename}...")
+        with open(self._filename, encoding="utf-8") as urlsfile:
+            logger.info(f"Reading video urls from {self._filename}...")
             urls.extend(urlsfile.read().splitlines())
 
         return urls

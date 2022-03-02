@@ -1,9 +1,9 @@
-from utils import logger, get_configuration
-
+from exceptions import UnsupportedUrlFileError
 from urlreader import urlreader
 from urlreader.txt_reader import TxtReader
 from urlreader.csv_reader import CsvReader
 from urlreader.xlsx_reader import ExcelReader
+from utils import get_configuration
 
 
 class UrlReaderFactory:
@@ -12,6 +12,8 @@ class UrlReaderFactory:
     @staticmethod
     def get_urlreader(cmdline_args) -> urlreader.UrlReader:
         """Get specific url reader according to filetype
+
+        Raises UnsupportedUrlFileError if file extension is not supported.
 
         :type cmdline_args: Namespace
         :param cmdline_args: Command line args returned by ArgumentParser
@@ -34,6 +36,7 @@ class UrlReaderFactory:
         elif url_file.endswith(".xlsx"):
             reader = ExcelReader(url_file)
         else:
-            logger.error("Unsupported url input file!")
+            message = "Unsupported url input file! Should be one of txt, csv, or xlsx"
+            raise UnsupportedUrlFileError(message)
 
         return reader
