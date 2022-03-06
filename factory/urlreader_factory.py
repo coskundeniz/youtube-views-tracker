@@ -32,7 +32,8 @@ class UrlReaderFactory:
         if url_file.endswith(".txt"):
             reader = TxtReader(url_file)
         elif url_file.endswith(".csv"):
-            reader = CsvReader(url_file)
+            url_column = config["url_column"] if cmdline_args.useconfig else cmdline_args.url_column
+            reader = CsvReader(url_file, url_column)
         elif url_file.endswith(".xlsx"):
             reader = ExcelReader(url_file)
         else:
