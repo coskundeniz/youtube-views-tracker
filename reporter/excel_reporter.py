@@ -9,7 +9,7 @@ from reporter.reporter import Reporter
 
 
 class ExcelReporter(Reporter):
-    """Url reader for txt files
+    """Excel report generator
 
     :type filename: str
     :param filename: Name of the output file
@@ -42,4 +42,23 @@ class ExcelReporter(Reporter):
             title_cell.value = video.title
             url_cell.value = video.url
 
+        titles = [video.title for video in videos]
+        urls = [video.url for video in videos]
+        self._adjust_column_width(sheet, "B", titles)
+        self._adjust_column_width(sheet, "C", urls)
+
         workbook.save(self._filename)
+
+    def _adjust_column_width(self, sheet: "Worksheet", column: str, contents: list[str]) -> None:
+        """Adjust the width of given column according to maximum length of content
+
+        :type sheet: Worksheet
+        :param sheet: Active worksheet object
+        :type column: str
+        :param column: Column name
+        :type contents: list
+        :param contents: Column contents
+        """
+
+        max_content_length = max([len(content) for content in contents])
+        sheet.column_dimensions[column].width = max_content_length
