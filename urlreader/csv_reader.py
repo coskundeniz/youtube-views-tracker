@@ -11,6 +11,8 @@ class CsvReader(UrlReader):
 
     :type filename: str
     :param filename: Name of the file containing video urls
+    :type url_column: int
+    :param url_column: Url column index
     """
 
     def __init__(self, filename: str, url_column: int) -> None:
@@ -25,13 +27,11 @@ class CsvReader(UrlReader):
         :returns: List of video urls
         """
 
-        if not os.path.exists(self._filename):
-            message = f"Url file {self._filename} does not exist!"
-            raise UrlFileDoesNotExistError(message)
+        self.check_file_exists(self._filename)
 
         urls = []
 
-        with open(self._filename, newline="") as csvfile:
+        with open(self._filename, newline="", encoding="utf-8") as csvfile:
             logger.info(f"Reading video urls from {self._filename}...")
             reader = csv.reader(csvfile)
             for row in reader:

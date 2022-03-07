@@ -23,9 +23,7 @@ class TxtReader(UrlReader):
         :returns: List of video urls
         """
 
-        if not os.path.exists(self._filename):
-            message = f"Url file {self._filename} does not exist!"
-            raise UrlFileDoesNotExistError(message)
+        self.check_file_exists(self._filename)
 
         urls = []
         with open(self._filename, encoding="utf-8") as urlsfile:
