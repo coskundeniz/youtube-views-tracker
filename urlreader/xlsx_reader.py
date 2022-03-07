@@ -1,7 +1,5 @@
-import os
 from openpyxl import load_workbook
 
-from exceptions import UrlFileDoesNotExistError
 from utils import logger
 from urlreader.urlreader import UrlReader
 

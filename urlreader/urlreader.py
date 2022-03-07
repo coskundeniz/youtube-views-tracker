@@ -11,7 +11,8 @@ class UrlReader(ABC):
     def read_urls(self) -> list:
         """Read urls from file"""
 
-    def check_file_exists(self, filepath: str) -> None:
+    @staticmethod
+    def check_file_exists(filepath: str) -> None:
         """Check if given filepath exists
 
         Raises UrlFileDoesNotExistError if file does not exist.

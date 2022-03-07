@@ -1,7 +1,5 @@
-import os
 import csv
 
-from exceptions import UrlFileDoesNotExistError
 from utils import logger
 from urlreader.urlreader import UrlReader
 

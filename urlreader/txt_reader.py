@@ -1,6 +1,3 @@
-import os
-
-from exceptions import UrlFileDoesNotExistError
 from utils import logger
 from urlreader.urlreader import UrlReader
 
