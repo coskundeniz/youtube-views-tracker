@@ -23,8 +23,9 @@ class UrlReaderFactory:
 
         reader = None
 
+        config = get_configuration()
+
         if cmdline_args.useconfig:
-            config = get_configuration()
             url_file = config["urlsfile"]
         else:
             url_file = cmdline_args.urlsfile
@@ -32,10 +33,10 @@ class UrlReaderFactory:
         if url_file.endswith(".txt"):
             reader = TxtReader(url_file)
         elif url_file.endswith(".csv"):
-            url_column = UrlReaderFactory.get_url_column(cmdline_args, config)
+            url_column = UrlReaderFactory._get_url_column(cmdline_args, config)
             reader = CsvReader(url_file, url_column)
         elif url_file.endswith(".xlsx"):
-            url_column = UrlReaderFactory.get_url_column(cmdline_args, config)
+            url_column = UrlReaderFactory._get_url_column(cmdline_args, config)
             reader = ExcelReader(url_file, url_column)
         else:
             message = "Unsupported url input file! Should be one of txt, csv, or xlsx"
@@ -44,7 +45,7 @@ class UrlReaderFactory:
         return reader
 
     @staticmethod
-    def get_url_column(cmdline_args: "Namespace", config: dict) -> int:
+    def _get_url_column(cmdline_args: "Namespace", config: dict) -> int:
         """Get url_column parameter
 
         :type cmdline_args: Namespace
