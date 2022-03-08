@@ -7,14 +7,13 @@ from exceptions import (
     UnsupportedUrlFileError,
     UrlFileDoesNotExistError,
     UnsupportedOutputFileError,
+    EmptyUrlListError,
 )
 from factory.urlreader_factory import UrlReaderFactory
 from factory.reporter_factory import ReporterFactory
 from utils import logger
 from yt_views import YoutubeViews
 
-
-# https://pytube.io/en/latest/api.html#module-pytube.exceptions
 
 # TODO: Get views for a list of video URLs (URLs can be read from txt, csv, xlsx, or Google Sheets)
 
@@ -93,7 +92,7 @@ def main():
     try:
         video_urls = url_reader.read_urls()
         # video_urls = Channel("https://www.youtube.com/c/ArjanCodes/").video_urls
-    except UrlFileDoesNotExistError as exp:
+    except (UrlFileDoesNotExistError, EmptyUrlListError) as exp:
         handle_exception(exp)
 
     # get/update view counts for the urls

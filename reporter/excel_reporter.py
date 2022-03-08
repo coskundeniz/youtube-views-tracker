@@ -1,11 +1,7 @@
-import os
-
 import openpyxl
 
 from utils import logger
 from reporter.reporter import Reporter
-
-# https://www.geeksforgeeks.org/working-with-excel-spreadsheets-in-python/
 
 
 class ExcelReporter(Reporter):
@@ -61,4 +57,4 @@ class ExcelReporter(Reporter):
         """
 
         max_content_length = max([len(content) for content in contents])
-        sheet.column_dimensions[column].width = max_content_length
+        sheet.column_dimensions[column].width = max_content_length + 2

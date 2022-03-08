@@ -1,5 +1,6 @@
 from openpyxl import load_workbook
 
+from exceptions import EmptyUrlListError
 from utils import logger
 from urlreader.urlreader import UrlReader
 
@@ -27,8 +28,6 @@ class ExcelReader(UrlReader):
 
         self.check_file_exists(self._filename)
 
-        urls = []
-
         workbook = load_workbook(self._filename)
         sheet = workbook.active
 
@@ -37,8 +36,13 @@ class ExcelReader(UrlReader):
         logger.info(f"Reading video urls from {self._filename}...")
         logger.debug(f"Number of rows: {total_rows}")
 
+        urls = []
+
         for row_index in range(total_rows):
             cell = sheet.cell(row=row_index + 1, column=self._url_column + 1)
             urls.append(cell.value)
+
+        if not all(urls):
+            raise EmptyUrlListError("Video url list is empty! Please provide urls.")
 
         return urls

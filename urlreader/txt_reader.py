@@ -1,3 +1,4 @@
+from exceptions import EmptyUrlListError
 from utils import logger
 from urlreader.urlreader import UrlReader
 
@@ -26,5 +27,8 @@ class TxtReader(UrlReader):
         with open(self._filename, encoding="utf-8") as urlsfile:
             logger.info(f"Reading video urls from {self._filename}...")
             urls.extend(urlsfile.read().splitlines())
+
+        if not urls:
+            raise EmptyUrlListError("Video url list is empty! Please provide urls.")
 
         return urls

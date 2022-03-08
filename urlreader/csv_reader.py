@@ -1,5 +1,6 @@
 import csv
 
+from exceptions import EmptyUrlListError
 from utils import logger
 from urlreader.urlreader import UrlReader
 
@@ -34,5 +35,8 @@ class CsvReader(UrlReader):
             reader = csv.reader(csvfile)
             for row in reader:
                 urls.append(row[self._url_column].strip())
+
+        if len("".join(urls)) == 0:
+            raise EmptyUrlListError("Video url list is empty! Please provide urls.")
 
         return urls

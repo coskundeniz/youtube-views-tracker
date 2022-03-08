@@ -10,8 +10,8 @@ class UnsupportedUrlFileError(YTViewsTrackerException):
     """Unsupported file extension for url file"""
 
 
-# class YoutubeVideoUnavailableError(YTViewsTrackerException):
-#     """Unavailable video exception"""
+class EmptyUrlListError(YTViewsTrackerException):
+    """Empty url list exception"""
 
 
 class UnsupportedOutputFileError(YTViewsTrackerException):

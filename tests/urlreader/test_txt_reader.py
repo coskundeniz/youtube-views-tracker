@@ -1,6 +1,6 @@
 import pytest
 
-from exceptions import UrlFileDoesNotExistError
+from exceptions import UrlFileDoesNotExistError, EmptyUrlListError
 from urlreader.urlreader import UrlReader
 from urlreader.txt_reader import TxtReader
 
@@ -17,3 +17,10 @@ def test_read_urls():
     urls = reader.read_urls()
 
     assert len(urls) == 6
+
+
+def test_read_empty_url_list():
+
+    with pytest.raises(EmptyUrlListError):
+        reader = TxtReader("tests/urlreader/empty_urls.txt")
+        reader.read_urls()
