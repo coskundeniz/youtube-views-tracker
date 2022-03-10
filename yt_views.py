@@ -61,8 +61,6 @@ class YoutubeViews:
             youtube_video = YoutubeVideo(video_url, video.title, video.views)
         except VideoUnavailable:
             logger.error(f"Video {video_url} is unavailable, skipping...")
-        except PytubeError:
-            logger.error(f"Could not get video details for {video_url}!")
 
         return youtube_video
 

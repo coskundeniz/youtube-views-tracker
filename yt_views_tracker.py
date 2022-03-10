@@ -92,6 +92,7 @@ def main():
     try:
         video_urls = url_reader.read_urls()
         # video_urls = Channel("https://www.youtube.com/c/ArjanCodes/").video_urls
+        # video_urls = Channel("https://www.youtube.com/c/Coreyms/").video_urls
     except (UrlFileDoesNotExistError, EmptyUrlListError) as exp:
         handle_exception(exp)
 

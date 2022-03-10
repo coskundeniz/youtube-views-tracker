@@ -53,6 +53,15 @@ def test_get_urlreader_for_txt(arg_parser, config_data):
     assert isinstance(reader, TxtReader)
 
 
+def test_get_urlreader_for_txt_using_configfile(arg_parser):
+
+    args = arg_parser.parse_args(["--useconfig"])
+
+    reader = UrlReaderFactory.get_urlreader(args)
+
+    assert isinstance(reader, TxtReader)
+
+
 def test_get_urlreader_for_csv(arg_parser, config_data):
 
     args = arg_parser.parse_args(["-f", config_data["csv"]["urlsfile"]])

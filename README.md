@@ -16,6 +16,8 @@ https://wiki.python.org/moin/Asking%20for%20Help/How%20do%20you%20protect%20Pyth
 
 `coverage run --omit *dist-packages* -m pytest -vs`
 
+
 ### How to check coverage
 
 `coverage report --omit *dist-packages*`
+`coverage html --omit *dist-packages*`

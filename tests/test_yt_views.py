@@ -20,6 +20,16 @@ def test_create_with_video_urls(video_urls):
     assert len(yt_views.videos) == 0
 
 
+def test_create_with_video_urls_more_than_hundred():
+
+    video_urls = open("tests/urlreader/urls_more_than_hundred.txt").read().splitlines()
+    yt_views = YoutubeViews(video_urls=video_urls)
+    yt_views.update()
+
+    assert isinstance(yt_views, YoutubeViews)
+    assert len(yt_views.videos) == len(video_urls)
+
+
 def test_create_without_keyword_argument(video_urls):
 
     with pytest.raises(TypeError):
@@ -31,7 +41,7 @@ def test_update_views(video_urls):
     yt_views = YoutubeViews(video_urls=video_urls)
     yt_views.update()
 
-    assert len(yt_views.videos) == 2
+    assert len(yt_views.videos) == len(video_urls)
     assert yt_views.videos[0].views > 180
     assert yt_views.videos[1].views > 200
 

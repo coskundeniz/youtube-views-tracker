@@ -53,3 +53,19 @@ def test_create_excel_report(reporter, videos):
     assert sheet.cell(row=1, column=2).value == videos[0].title
     assert sheet.cell(row=2, column=3).value == videos[1].url
     assert sheet.cell(row=3, column=1).value == videos[2].views
+
+
+def test_create_excel_report_with_existing_report(reporter, videos):
+
+    reporter.update_views(videos)
+    reporter.update_views(videos)
+
+    workbook = load_workbook("tests/reporter/results.xlsx")
+    sheet = workbook.active
+
+    total_rows = len(list(sheet.rows))
+
+    assert total_rows == 3
+    assert sheet.cell(row=1, column=2).value == videos[0].title
+    assert sheet.cell(row=2, column=3).value == videos[1].url
+    assert sheet.cell(row=3, column=1).value == videos[2].views

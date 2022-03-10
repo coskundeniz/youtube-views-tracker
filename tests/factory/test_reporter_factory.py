@@ -42,6 +42,15 @@ def test_get_reporter_for_excel(arg_parser, config_data):
     assert isinstance(reader, ExcelReporter)
 
 
+def test_get_reporter_for_excel_using_configfile(arg_parser):
+
+    args = arg_parser.parse_args(["--useconfig"])
+
+    reader = ReporterFactory.get_reporter(args)
+
+    assert isinstance(reader, ExcelReporter)
+
+
 def test_get_reporter_for_gsheets(arg_parser, config_data):
 
     args = arg_parser.parse_args(["-ot", config_data["gsheets"]["output_type"]])

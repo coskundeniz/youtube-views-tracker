@@ -19,7 +19,7 @@ def test_config_keys(config_data):
 
 def test_config_default_values(config_data):
 
-    assert config_data["urlsfile"] == "/home/coskun/video_urls.xlsx"
+    assert config_data["urlsfile"] == "/home/coskun/video_urls.txt"
     assert config_data["channels"] == ["ArjanCodes", "coskundenize"]
     assert config_data["output_type"] == "excel"
     assert config_data["output_file"] == "results.xlsx"
