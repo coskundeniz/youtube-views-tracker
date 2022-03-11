@@ -8,6 +8,7 @@ from exceptions import (
     UrlFileDoesNotExistError,
     UnsupportedOutputFileError,
     EmptyUrlListError,
+    MissingShareMailError,
 )
 from factory.urlreader_factory import UrlReaderFactory
 from factory.reporter_factory import ReporterFactory
@@ -16,25 +17,6 @@ from yt_views import YoutubeViews
 
 
 # TODO: Get views for a list of video URLs (URLs can be read from txt, csv, xlsx, or Google Sheets)
-
-
-def get_views_from_urls(urls):
-
-    for url in urls:
-        video = YouTube(url)
-        print(f"Title: {video.title} - Views Count: {video.views}, Length: {video.length}")
-
-
-def get_views_from_channel(channel_url):
-
-    mychannel = Channel(channel_url)
-
-    print(f"Channel name: {mychannel.channel_name}")
-    print(f"Number of videos: {len(mychannel.videos)}")
-    print(f"Number of video_urls: {len(mychannel.video_urls)}")
-
-    for video in mychannel.videos:
-        print(f"Title: {video.title} - Views Count: {video.views}")
 
 
 def handle_exception(exp: YTViewsTrackerException) -> None:
@@ -66,6 +48,9 @@ def get_arg_parser() -> ArgumentParser:
     arg_parser.add_argument(
         "-uc", "--url_column", type=int, default=0, help="Url column index for csv and xlsx input"
     )
+    arg_parser.add_argument(
+        "-sm", "--share_mail", help="Mail address to share Google Sheets document"
+    )
 
     return arg_parser
 
@@ -83,10 +68,7 @@ def main():
     try:
         url_reader = UrlReaderFactory.get_urlreader(args)
         reporter = ReporterFactory.get_reporter(args)
-    except (
-        UnsupportedUrlFileError,
-        UnsupportedOutputFileError,
-    ) as exp:
+    except (UnsupportedUrlFileError, UnsupportedOutputFileError, MissingShareMailError) as exp:
         handle_exception(exp)
 
     try:
@@ -102,6 +84,8 @@ def main():
 
     # update views on Excel
     reporter.update_views(yt_views.videos)
+
+    logger.info("Completed views update.")
 
 
 if __name__ == "__main__":

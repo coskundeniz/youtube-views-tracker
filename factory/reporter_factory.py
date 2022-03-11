@@ -22,8 +22,10 @@ class ReporterFactory:
 
         reporter = None
 
+        config = get_configuration()
+
         if cmdline_args.useconfig:
-            config = get_configuration()
+
             output_type = config["output_type"]
             output_file = config["output_file"]
         else:
@@ -33,7 +35,8 @@ class ReporterFactory:
         if output_type == "excel":
             reporter = ExcelReporter(output_file)
         elif output_type == "gsheets":
-            reporter = GSheetsReporter(output_file)
+            share_mail = config["share_mail"] if cmdline_args.useconfig else cmdline_args.share_mail
+            reporter = GSheetsReporter(output_file, share_mail)
         else:
             message = "Unsupported output file! Should be one of excel, gsheets"
             raise UnsupportedOutputFileError(message)

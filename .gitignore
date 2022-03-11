@@ -130,3 +130,5 @@ dmypy.json
 
 *.un~
 *.xlsx
+
+credentials.json

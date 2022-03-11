@@ -16,3 +16,7 @@ class EmptyUrlListError(YTViewsTrackerException):
 
 class UnsupportedOutputFileError(YTViewsTrackerException):
     """Unsupported output file exception"""
+
+
+class MissingShareMailError(YTViewsTrackerException):
+    """Missing share mail exception"""
