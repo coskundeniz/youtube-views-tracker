@@ -3,6 +3,7 @@ from urlreader import urlreader
 from urlreader.txt_reader import TxtReader
 from urlreader.csv_reader import CsvReader
 from urlreader.xlsx_reader import ExcelReader
+from urlreader.gsheets_reader import GSheetsReader
 from utils import get_configuration
 
 
@@ -38,6 +39,10 @@ class UrlReaderFactory:
         elif url_file.endswith(".xlsx"):
             url_column = UrlReaderFactory._get_url_column(cmdline_args, config)
             reader = ExcelReader(url_file, url_column)
+        elif url_file.startswith("gsheets-"):
+            url_file = url_file.split("gsheets-")[1]
+            url_column = UrlReaderFactory._get_url_column(cmdline_args, config)
+            reader = GSheetsReader(url_file, url_column)
         else:
             message = "Unsupported url input file! Should be one of txt, csv, or xlsx"
             raise UnsupportedUrlFileError(message)

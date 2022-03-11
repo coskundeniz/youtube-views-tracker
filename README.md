@@ -15,6 +15,14 @@ https://wiki.python.org/moin/Asking%20for%20Help/How%20do%20you%20protect%20Pyth
 
 ## How to use
 
+* If you will use Google Sheets for getting video url inputs, add "gsheets-" prefix to the urlsfile(f) parameter.
+
+    * python yt_views_tracker.py -f gsheets-video_urls
+    * python yt_views_tracker.py -f gsheets-video_urls -uc 2
+    * python yt_views_tracker.py -f gsheets-https://docs.google.com/spreadsheets/d/1dtFZbg4Gm8mCopO9fpZ-DwJ37uLMopgLePgFdigutuI
+
+* yt_views_tracker.py -f ~/video_urls.txt -ot gsheets -of view_results
+
 
 ### Creating project on Google Cloud Console
 
@@ -36,17 +44,17 @@ https://wiki.python.org/moin/Asking%20for%20Help/How%20do%20you%20protect%20Pyth
 
     * Save download file as "credentials.json" and copy to project directory.
 
-6. Share your document with the value of "client_email" field.
+6. Share your document with the value of "client_email" field if you will read urls from Google Sheets.
 
 
 ## How to run tests
 
-`pytest -vs`
+* `pytest -vs`
 
-`coverage run --omit *dist-packages* -m pytest -vs`
+* `coverage run --omit *dist-packages* -m pytest -vs`
 
 
 ### How to check coverage
 
-`coverage report --omit *dist-packages*`
-`coverage html --omit *dist-packages*`
+* `coverage report --omit *dist-packages*`
+* `coverage html --omit *dist-packages*`

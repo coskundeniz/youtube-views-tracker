@@ -5,6 +5,7 @@ from factory.urlreader_factory import UrlReaderFactory
 from urlreader.txt_reader import TxtReader
 from urlreader.csv_reader import CsvReader
 from urlreader.xlsx_reader import ExcelReader
+from urlreader.gsheets_reader import GSheetsReader
 from yt_views_tracker import get_arg_parser
 
 
@@ -12,9 +13,7 @@ from yt_views_tracker import get_arg_parser
 def config_data():
 
     return {
-        "txt": {
-            "urlsfile": "tests/urlreader/urls.txt",
-        },
+        "txt": {"urlsfile": "tests/urlreader/urls.txt"},
         "csv": {
             "urlsfile": "tests/urlreader/urls_default.csv",
             "urlsfile_diff_column": "tests/urlreader/urls_diff_column.csv",
@@ -23,6 +22,7 @@ def config_data():
             "urlsfile": "tests/urlreader/urls_default.xlsx",
             "urlsfile_diff_column": "tests/urlreader/urls_diff_column.xlsx",
         },
+        "gsheets": {"urlsfile": "gsheets-video_urls_test"},
         "channels": ["ArjanCodes", "coskundenize"],
         "output_type": "excel",
         "output_file": "test_results.xlsx",
@@ -103,4 +103,25 @@ def test_get_urlreader_for_xlsx_diff_column(arg_parser, config_data):
     reader = UrlReaderFactory.get_urlreader(args)
 
     assert isinstance(reader, ExcelReader)
+    assert reader._url_column == 1
+
+
+def test_get_urlreader_for_gsheets(arg_parser, config_data):
+
+    args = arg_parser.parse_args(["-f", config_data["gsheets"]["urlsfile"]])
+
+    reader = UrlReaderFactory.get_urlreader(args)
+
+    assert isinstance(reader, GSheetsReader)
+    assert reader._url_column == 0
+    assert reader._filename == config_data["gsheets"]["urlsfile"].split("-")[1]
+
+
+def test_get_urlreader_for_gsheets_diff_column(arg_parser, config_data):
+
+    args = arg_parser.parse_args(["-f", config_data["gsheets"]["urlsfile"], "-uc", "1"])
+
+    reader = UrlReaderFactory.get_urlreader(args)
+
+    assert isinstance(reader, GSheetsReader)
     assert reader._url_column == 1

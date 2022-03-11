@@ -46,7 +46,11 @@ def get_arg_parser() -> ArgumentParser:
     arg_parser.add_argument("-ot", "--output_type", default="excel", help="Output file type")
     arg_parser.add_argument("-of", "--output_file", default="results.xlsx", help="Output file name")
     arg_parser.add_argument(
-        "-uc", "--url_column", type=int, default=0, help="Url column index for csv and xlsx input"
+        "-uc",
+        "--url_column",
+        type=int,
+        default=0,
+        help="Url column index for csv,xlsx, and Google Sheets input",
     )
     arg_parser.add_argument(
         "-sm", "--share_mail", help="Mail address to share Google Sheets document"

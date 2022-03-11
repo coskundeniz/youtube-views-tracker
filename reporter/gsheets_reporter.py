@@ -24,6 +24,7 @@ class GSheetsReporter(Reporter):
             raise MissingShareMailError("share_mail(sm) parameter is missing!")
 
         self._sheets_client = gspread.service_account(filename="credentials.json")
+        self._gsheet = None
 
     def update_views(self, videos: list["YoutubeVideo"]) -> None:
         """Update view counts for videos on the output file
@@ -53,19 +54,20 @@ class GSheetsReporter(Reporter):
         :returns: Spreadsheet instance
         """
 
-        try:
-            logger.info(f"Opening sheet {self._filename}...")
+        if self._gsheet is None:
+            try:
+                logger.info(f"Opening sheet {self._filename}...")
 
-            if "docs.google.com" in self._filename:
-                gsheet = self._sheets_client.open_by_url(self._filename)
-            else:
-                gsheet = self._sheets_client.open(self._filename)
+                if "docs.google.com" in self._filename:
+                    self._gsheet = self._sheets_client.open_by_url(self._filename)
+                else:
+                    self._gsheet = self._sheets_client.open(self._filename)
 
-        except SpreadsheetNotFound:
-            logger.error(f"Spreadsheet could not be found with name: {self._filename}")
-            logger.info(f"Creating a sheet with name: {self._filename}")
-            gsheet = self._sheets_client.create(self._filename)
+            except SpreadsheetNotFound:
+                logger.error(f"Spreadsheet could not be found with name: {self._filename}")
+                logger.info(f"Creating a sheet with name: {self._filename}")
+                self._gsheet = self._sheets_client.create(self._filename)
 
-            gsheet.share(self._share_mail, perm_type="user", role="writer")
+                self._gsheet.share(self._share_mail, perm_type="user", role="writer")
 
-        return gsheet
+        return self._gsheet
