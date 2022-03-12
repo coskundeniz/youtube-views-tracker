@@ -12,7 +12,7 @@ class UrlReaderFactory:
     """Factory class for url readers"""
 
     @staticmethod
-    def get_urlreader(cmdline_args: "Namespace") -> urlreader.UrlReader:
+    def get_urlreader(cmdline_args: "Namespace") -> urlreader.UrlReader:  # noqa: F821
         """Get specific url reader according to filetype
 
         If urlsfile argument is empty, channels will be used.
@@ -27,7 +27,7 @@ class UrlReaderFactory:
 
         reader = None
 
-        config = get_configuration()
+        config = get_configuration(cmdline_args.configfile)
 
         if cmdline_args.useconfig:
             url_file = config["urlsfile"]
@@ -64,7 +64,7 @@ class UrlReaderFactory:
         return reader
 
     @staticmethod
-    def _get_url_column(cmdline_args: "Namespace", config: dict) -> int:
+    def _get_url_column(cmdline_args: "Namespace", config: dict) -> int:  # noqa: F821
         """Get url_column parameter
 
         :type cmdline_args: Namespace

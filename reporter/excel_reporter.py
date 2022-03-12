@@ -1,4 +1,5 @@
 import os
+from typing import TYPE_CHECKING
 
 import openpyxl
 from openpyxl import load_workbook
@@ -6,6 +7,10 @@ from openpyxl.chart import BarChart, Reference
 
 from utils import logger
 from reporter.reporter import Reporter
+
+
+if TYPE_CHECKING:  # pragma: no cover
+    from video import YoutubeVideo
 
 
 class ExcelReporter(Reporter):
@@ -100,7 +105,9 @@ class ExcelReporter(Reporter):
 
         return workbook
 
-    def _adjust_column_width(self, sheet: "Worksheet", column: str, contents: list[str]) -> None:
+    def _adjust_column_width(
+        self, sheet: "Worksheet", column: str, contents: list[str]  # noqa: F821
+    ) -> None:
         """Adjust the width of given column according to maximum length of content
 
         :type sheet: Worksheet
@@ -114,7 +121,7 @@ class ExcelReporter(Reporter):
         max_content_length = max([len(content) for content in contents])
         sheet.column_dimensions[column].width = max_content_length + 2
 
-    def _get_sorted_worksheet(self, workbook: openpyxl.Workbook) -> "Worksheet":
+    def _get_sorted_worksheet(self, workbook: openpyxl.Workbook) -> "Worksheet":  # noqa: F821
         """Get a worksheet sorted by view counts
 
         :type workbook: openpyxl.Workbook

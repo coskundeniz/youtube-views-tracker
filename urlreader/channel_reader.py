@@ -1,4 +1,5 @@
 from pytube import Channel
+from urllib.error import HTTPError
 
 from utils import logger
 from urlreader.urlreader import UrlReader
@@ -16,7 +17,7 @@ class ChannelReader(UrlReader):
         # TODO: get first 3 or 5 according to package
         self._channel_urls = channel_urls
 
-    def read_urls(self) -> list:
+    def read_urls(self) -> list[str]:
         """Extract video urls from given channels
 
         :rtype: list
@@ -27,7 +28,11 @@ class ChannelReader(UrlReader):
         for channel_url in self._channel_urls:
             logger.info(f"Reading video urls from {channel_url}...")
             channel = self._construct_channel(channel_url.strip())
-            urls.extend(channel.video_urls)
+
+            try:
+                urls.extend(channel.video_urls)
+            except HTTPError:
+                logger.error(f"Invalid channel url: {channel_url} Skipping...")
 
         return urls
 

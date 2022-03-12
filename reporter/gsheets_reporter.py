@@ -1,3 +1,5 @@
+from typing import TYPE_CHECKING
+
 import gspread
 from gspread.spreadsheet import Spreadsheet
 from gspread.exceptions import SpreadsheetNotFound
@@ -5,6 +7,10 @@ from gspread.exceptions import SpreadsheetNotFound
 from exceptions import MissingShareMailError
 from utils import logger
 from reporter.reporter import Reporter
+
+
+if TYPE_CHECKING:  # pragma: no cover
+    from video import YoutubeVideo
 
 
 class GSheetsReporter(Reporter):

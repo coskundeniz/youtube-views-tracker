@@ -28,14 +28,16 @@ logger.addHandler(console_handler)
 logger.addHandler(file_handler)
 
 
-def get_configuration() -> dict:
+def get_configuration(filename="config.json") -> dict:
     """Read configuration file
 
+    :type filename: str
+    :param filename: Name of the configuration file
     :rtype: dict
     :returns: Configuration as dict
     """
 
-    with open("config.json", encoding="utf-8") as configfile:
+    with open(filename, encoding="utf-8") as configfile:
         config = json.load(configfile)
 
     return config

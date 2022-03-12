@@ -14,9 +14,6 @@ from utils import logger
 from yt_views import YoutubeViews
 
 
-# TODO: Get views for a list of video URLs (URLs can be read from txt, csv, xlsx, or Google Sheets)
-
-
 def handle_exception(exp: YTViewsTrackerException) -> None:
     """Print the error message and exit
 
@@ -39,8 +36,14 @@ def get_arg_parser() -> ArgumentParser:
     arg_parser.add_argument(
         "-c", "--useconfig", action="store_true", help="Read configuration from config.json file"
     )
+    arg_parser.add_argument(
+        "-cf",
+        "--configfile",
+        default="config.json",
+        help="Read configuration from config.json file",
+    )
     arg_parser.add_argument("-f", "--urlsfile", help="File to read video urls")
-    arg_parser.add_argument("-ch", "--channels", help="Channel names separated by comma")
+    arg_parser.add_argument("-ch", "--channels", help="Channel urls separated by comma")
     arg_parser.add_argument(
         "-ot", "--output_type", default="excel", help="Output file type (one of excel, gsheets)"
     )
@@ -76,6 +79,8 @@ def main():
     # read video urls from txt, csv, xlsx or Google Sheets file
     try:
         video_urls = url_reader.read_urls()
+        print(video_urls)
+        raise SystemExit()
     except (UrlFileDoesNotExistError, EmptyUrlListError) as exp:
         handle_exception(exp)
 

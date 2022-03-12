@@ -74,5 +74,5 @@ https://wiki.python.org/moin/Asking%20for%20Help/How%20do%20you%20protect%20Pyth
 
 ### How to check coverage
 
-* `coverage report --omit *dist-packages*`
-* `coverage html --omit *dist-packages*`
+* `coverage report --omit *dist-packages,yt_views_tracker.py*`
+* `coverage html --omit *dist-packages,yt_views_tracker.py*`

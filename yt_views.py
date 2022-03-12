@@ -1,8 +1,8 @@
 from concurrent.futures import ThreadPoolExecutor
 from typing import Optional
 
-from pytube import YouTube, Channel
-from pytube.exceptions import PytubeError, VideoUnavailable
+from pytube import YouTube
+from pytube.exceptions import VideoUnavailable
 
 from utils import logger
 from video import YoutubeVideo
