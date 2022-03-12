@@ -1,7 +1,5 @@
 import pytest
 
-from gspread.exceptions import APIError
-
 from exceptions import UrlFileDoesNotExistError, EmptyUrlListError
 from urlreader.gsheets_reader import GSheetsReader
 
@@ -39,18 +37,12 @@ def test_read_empty_url_list_from_given_column():
 
 def test_read_urls_with_inputfile_as_url():
 
-    try:
-        reader = GSheetsReader("video_urls_test", 0)
+    reader = GSheetsReader("video_urls_test", 0)
 
-        input_file_url = reader._get_sheet().url
-        reader_with_url = GSheetsReader(input_file_url, 0)
+    input_file_url = reader._get_sheet().url
+    reader_with_url = GSheetsReader(input_file_url, 0)
 
-        urls = reader_with_url.read_urls()
+    urls = reader_with_url.read_urls()
 
-        assert len(urls) == 6
-        assert urls[0] == "https://www.youtube.com/watch?v=mM2-FPm1EhI"
-
-    except APIError:
-        from time import sleep
-
-        sleep(5)
+    assert len(urls) == 6
+    assert urls[0] == "https://www.youtube.com/watch?v=mM2-FPm1EhI"

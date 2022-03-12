@@ -31,21 +31,15 @@ class GSheetsReader(UrlReader):
         """
 
         gsheet = self._get_sheet()
-
         worksheet = gsheet.sheet1
 
-        total_rows = len(worksheet.get_values())
-
         logger.info(f"Reading video urls from {self._filename}...")
-        logger.debug(f"Number of rows: {total_rows}")
 
-        urls = []
+        urls = worksheet.col_values(self._url_column + 1)
 
-        for row_index in range(total_rows):
-            cell = worksheet.cell(row_index + 1, self._url_column + 1)
-            urls.append(cell.value)
+        logger.debug(f"Number of rows: {len(urls)}")
 
-        if not all(urls):
+        if not urls:
             raise EmptyUrlListError("Video url list is empty! Please provide urls.")
 
         return urls

@@ -39,11 +39,20 @@ class GSheetsReporter(Reporter):
 
         worksheet = gsheet.sheet1
 
-        for index, video in enumerate(videos, start=1):
+        update_range = f"A1:C{len(videos)}"
+        values = []
 
-            worksheet.update_cell(row=index, col=1, value=video.views)
-            worksheet.update_cell(row=index, col=2, value=video.title)
-            worksheet.update_cell(row=index, col=3, value=video.url)
+        for video in videos:
+            values.append([video.views, video.title, video.url])
+
+        worksheet.batch_update(
+            [
+                {
+                    "range": update_range,
+                    "values": values,
+                }
+            ]
+        )
 
         worksheet.columns_auto_resize(start_column_index=1, end_column_index=3)
 
