@@ -1,8 +1,8 @@
 {
-    "urlsfile": "/home/coskun/video_urls.txt",
+    "urlsfile": "",
     "channels": [
-        "ArjanCodes",
-        "coskundenize"
+        "https://www.youtube.com/c/ArjanCodes/",
+        "https://www.youtube.com/user/coskundenize"
     ],
     "output_type": "excel",
     "output_file": "results.xlsx",

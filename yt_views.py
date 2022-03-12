@@ -11,23 +11,19 @@ from video import YoutubeVideo
 
 
 class YoutubeViews:
-    """Get view counts for given urls or channel videos
+    """Get view counts for given video urls
 
     :type video_urls: list
     :param video_urls: List of video urls
-    :type channels: list
-    :param channels: List of channel names
     """
 
     def __init__(
         self,
         *,
         video_urls: Optional[list[str]] = None,
-        channels: Optional[list[str]] = None,
     ) -> None:
 
         self._video_urls = video_urls
-        self._channels = channels
         self._videos = []
 
     def update(self) -> None:

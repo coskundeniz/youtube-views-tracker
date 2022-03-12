@@ -23,6 +23,24 @@ https://wiki.python.org/moin/Asking%20for%20Help/How%20do%20you%20protect%20Pyth
 
 * yt_views_tracker.py -f ~/video_urls.txt -ot gsheets -of view_results
 
+* config.json example for channels
+
+    ```json
+    {
+        "urlsfile": "",
+        "channels": [
+            "https://www.youtube.com/c/ArjanCodes/",
+            "https://www.youtube.com/user/coskundenize"
+        ],
+        "output_type": "excel",
+        "output_file": "results.xlsx",
+        "url_column": 0,
+        "share_mail": "codenineeight@gmail.com"
+    }
+    ```
+
+    * urlsfile field must be empty.
+
 
 ### Creating project on Google Cloud Console
 

@@ -4,6 +4,7 @@ from urlreader.txt_reader import TxtReader
 from urlreader.csv_reader import CsvReader
 from urlreader.xlsx_reader import ExcelReader
 from urlreader.gsheets_reader import GSheetsReader
+from urlreader.channel_reader import ChannelReader
 from utils import get_configuration
 
 
@@ -13,6 +14,8 @@ class UrlReaderFactory:
     @staticmethod
     def get_urlreader(cmdline_args: "Namespace") -> urlreader.UrlReader:
         """Get specific url reader according to filetype
+
+        If urlsfile argument is empty, channels will be used.
 
         Raises UnsupportedUrlFileError if file extension is not supported.
 
@@ -31,18 +34,29 @@ class UrlReaderFactory:
         else:
             url_file = cmdline_args.urlsfile
 
-        if url_file.endswith(".txt"):
+        if not url_file:
+            if cmdline_args.useconfig:
+                channels = config["channels"]
+            else:
+                channels = cmdline_args.channels.split(",")
+            reader = ChannelReader(channels)
+
+        elif url_file.endswith(".txt"):
             reader = TxtReader(url_file)
+
         elif url_file.endswith(".csv"):
             url_column = UrlReaderFactory._get_url_column(cmdline_args, config)
             reader = CsvReader(url_file, url_column)
+
         elif url_file.endswith(".xlsx"):
             url_column = UrlReaderFactory._get_url_column(cmdline_args, config)
             reader = ExcelReader(url_file, url_column)
+
         elif url_file.startswith("gsheets-"):
             url_file = url_file.split("gsheets-")[1]
             url_column = UrlReaderFactory._get_url_column(cmdline_args, config)
             reader = GSheetsReader(url_file, url_column)
+
         else:
             message = "Unsupported url input file! Should be one of txt, csv, or xlsx"
             raise UnsupportedUrlFileError(message)
