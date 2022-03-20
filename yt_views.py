@@ -37,7 +37,7 @@ class YoutubeViews:
             for result in results:
                 if result:
                     self._videos.append(result)
-                    logger.debug(f"{result.views}, {result.title}, {result.url}")
+                    logger.debug(result)
 
     def _update_view(self, video_url: str) -> Optional[YoutubeVideo]:
         """Get title and view count information for the given video url

@@ -79,8 +79,6 @@ def main():
     # read video urls from txt, csv, xlsx or Google Sheets file
     try:
         video_urls = url_reader.read_urls()
-        print(video_urls)
-        raise SystemExit()
     except (UrlFileDoesNotExistError, EmptyUrlListError) as exp:
         handle_exception(exp)
 

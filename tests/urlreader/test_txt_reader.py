@@ -24,3 +24,11 @@ def test_read_empty_url_list():
     with pytest.raises(EmptyUrlListError):
         reader = TxtReader("tests/urlreader/empty_urls.txt")
         reader.read_urls()
+
+
+def test_read_more_than_1000_urls():
+
+    reader = TxtReader("tests/urlreader/video_urls_more_than_1000.txt")
+    urls = reader.read_urls()
+
+    assert len(urls) == 1000

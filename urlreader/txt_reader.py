@@ -31,4 +31,6 @@ class TxtReader(UrlReader):
         if not urls:
             raise EmptyUrlListError("Video url list is empty! Please provide urls.")
 
+        urls = self.check_url_count(urls)
+
         return urls

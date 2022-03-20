@@ -39,4 +39,6 @@ class CsvReader(UrlReader):
         if len("".join(urls)) == 0:
             raise EmptyUrlListError("Video url list is empty! Please provide urls.")
 
+        urls = self.check_url_count(urls)
+
         return urls

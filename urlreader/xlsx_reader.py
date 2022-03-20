@@ -45,4 +45,6 @@ class ExcelReader(UrlReader):
         if not all(urls):
             raise EmptyUrlListError("Video url list is empty! Please provide urls.")
 
+        urls = self.check_url_count(urls)
+
         return urls

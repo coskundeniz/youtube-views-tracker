@@ -1,4 +1,5 @@
 import pytest
+from datetime import datetime
 
 from yt_views import YoutubeViews
 
@@ -28,6 +29,17 @@ def test_create_with_video_urls_more_than_hundred():
 
     assert isinstance(yt_views, YoutubeViews)
     assert len(yt_views.videos) == len(video_urls)
+
+
+@pytest.mark.skipif(datetime.now().strftime("%A") != "Monday", reason="Test once a week on Monday")
+def test_create_with_video_urls_more_than_thousand():
+
+    video_urls = open("tests/urlreader/video_urls_more_than_1000.txt").read().splitlines()
+    yt_views = YoutubeViews(video_urls=video_urls[:1000])
+    yt_views.update()
+
+    assert isinstance(yt_views, YoutubeViews)
+    assert len(yt_views.videos) == 1000
 
 
 def test_create_without_keyword_argument(video_urls):
