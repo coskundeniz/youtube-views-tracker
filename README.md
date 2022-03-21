@@ -15,6 +15,30 @@ https://wiki.python.org/moin/Asking%20for%20Help/How%20do%20you%20protect%20Pyth
 
 ## How to use
 
+```sh
+usage: python yt_views_tracker.py [-h] [-c] [-cf CONFIGFILE] [-f URLSFILE] [-ch CHANNELS] [-ot OUTPUT_TYPE] [-of OUTPUT_FILE] [-uc URL_COLUMN] [-sm SHARE_MAIL] [-s SCHEDULE]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c, --useconfig       Read configuration from config.json file
+  -cf CONFIGFILE, --configfile CONFIGFILE
+                        Read configuration from given file
+  -f URLSFILE, --urlsfile URLSFILE
+                        File to read video urls
+  -ch CHANNELS, --channels CHANNELS
+                        Channel urls separated by comma
+  -ot OUTPUT_TYPE, --output_type OUTPUT_TYPE
+                        Output file type (one of excel, gsheets)
+  -of OUTPUT_FILE, --output_file OUTPUT_FILE
+                        Output file name
+  -uc URL_COLUMN, --url_column URL_COLUMN
+                        Url column index for csv, xlsx, or Google Sheets input
+  -sm SHARE_MAIL, --share_mail SHARE_MAIL
+                        Mail address to share Google Sheets document
+  -s SCHEDULE, --schedule SCHEDULE
+                        Interval to run as scheduled task
+```
+
 * If you will use Google Sheets for getting video url inputs, add "gsheets-" prefix to the urlsfile(f) parameter.
 
     * python yt_views_tracker.py -f gsheets-video_urls
@@ -35,11 +59,27 @@ https://wiki.python.org/moin/Asking%20for%20Help/How%20do%20you%20protect%20Pyth
         "output_type": "excel",
         "output_file": "results.xlsx",
         "url_column": 0,
-        "share_mail": "codenineeight@gmail.com"
+        "share_mail": "codenineeight@gmail.com",
+        "schedule": "NONE"
     }
     ```
 
     * urlsfile field must be empty.
+
+### Scheduling Options
+
+* Scheduling interval options
+
+    - NONE (default)
+    - 10 minutes
+    - 15 minutes
+    - 30 minutes
+    - 1 hour
+    - 3 hours
+    - 6 hours
+    - 8 hours
+    - 12 hours
+    - Once a day at "HH:MM"
 
 
 ### Creating project on Google Cloud Console

@@ -9,7 +9,7 @@ class ReporterFactory:
     """Factory class for url readers"""
 
     @staticmethod
-    def get_reporter(cmdline_args) -> reporter.Reporter:
+    def get_reporter(cmdline_args: "Namespace") -> reporter.Reporter:
         """Get specific reporter
 
         Raises UnsupportedOutputFileError if output format is not supported.
@@ -22,7 +22,7 @@ class ReporterFactory:
 
         reporter = None
 
-        config = get_configuration()
+        config = get_configuration(cmdline_args.configfile)
 
         if cmdline_args.useconfig:
 

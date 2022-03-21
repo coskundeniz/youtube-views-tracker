@@ -20,3 +20,11 @@ class UnsupportedOutputFileError(YTViewsTrackerException):
 
 class MissingShareMailError(YTViewsTrackerException):
     """Missing share mail exception"""
+
+
+class UnsupportedConfigFileError(YTViewsTrackerException):
+    """Unsupported config file exception"""
+
+
+class UnsupportedScheduleOptionError(YTViewsTrackerException):
+    """Unsupported schedule option exception"""
