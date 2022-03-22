@@ -1,6 +1,7 @@
 import json
 import logging
 from logging.handlers import RotatingFileHandler
+
 from exceptions import UnsupportedConfigFileError
 
 

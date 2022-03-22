@@ -7,8 +7,6 @@ from pytube.exceptions import VideoUnavailable
 from utils import logger
 from video import YoutubeVideo
 
-# https://michaelcho.me/article/using-pythons-watchdog-to-monitor-changes-to-a-directory
-
 
 class YoutubeViews:
     """Get view counts for given video urls

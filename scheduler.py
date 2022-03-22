@@ -80,7 +80,7 @@ def setup_schedule(interval: str, task: Callable, task_args: "Namespace") -> Non
         ):
             minute = int(interval[3:])
             logger.info(f"Setting scheduler to run in every {minute} minutes...")
-            schedule.every(1).minutes.do(task, task_args)
+            schedule.every(minute).minutes.do(task, task_args)
 
         elif scheduled_interval in (
             ScheduleInterval.HOUR1,
