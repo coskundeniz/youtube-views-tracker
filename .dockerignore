@@ -11,6 +11,7 @@ __pycache__/
 
 *.md
 *.log
+*.tar.gz
 
 credentials.json
 results.xlsx
