@@ -46,7 +46,7 @@ YouTube Views Tracker with Excel and Google Sheets Integration
 ## How to use
 
 ```sh
-usage: python yt_views_tracker.py [-h] [-c] [-cf CONFIGFILE] [-f URLSFILE] [-ch CHANNELS] [-ot OUTPUT_TYPE] [-of OUTPUT_FILE] [-uc URL_COLUMN] [-sm SHARE_MAIL] [-s SCHEDULE]
+usage: python yt_views_tracker.py [-h] [-c] [-cf CONFIGFILE] [-f URLSFILE] [-ch CHANNELS] [-ot OUTPUT_TYPE] [-of OUTPUT_FILE] [-uc URL_COLUMN] [-sm SHARE_MAIL]
 
 optional arguments:
   -h, --help                                    show this help message and exit
@@ -58,7 +58,6 @@ optional arguments:
   -of OUTPUT_FILE, --output_file OUTPUT_FILE    Output file name
   -uc URL_COLUMN, --url_column URL_COLUMN       Url column index for csv, xlsx, or Google Sheets input
   -sm SHARE_MAIL, --share_mail SHARE_MAIL       Mail address to share Google Sheets document
-  -s SCHEDULE, --schedule SCHEDULE              Interval to run as scheduled task
 ```
 
 * If you will use Google Sheets for getting video url inputs, add "gsheets-" prefix to the urlsfile(f) parameter.
@@ -82,13 +81,10 @@ optional arguments:
         "output_file": "results.xlsx",
         "url_column": 0,
         "share_mail": "codenineeight@gmail.com",
-        "schedule": "NONE"
     }
     ```
 
     * *urlsfile* field must be empty.
-
-
 
 ---
 

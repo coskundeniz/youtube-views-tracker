@@ -1,9 +1,0 @@
-{
-    "urlsfile": "/src/video_urls.txt",
-    "channels": [],
-    "output_type": "excel",
-    "output_file": "results.xlsx",
-    "url_column": 0,
-    "share_mail": "codenineeight@gmail.com",
-    "schedule": "NONE"
-}
