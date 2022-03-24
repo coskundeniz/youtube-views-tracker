@@ -16,7 +16,7 @@ class ChannelReader(UrlReader):
 
         self._channel_urls = channel_urls
 
-        if len(self._channel_urls) > 5:
+        if len(self._channel_urls) > UrlReader.MAX_CHANNEL_COUNT:
             max_channels = UrlReader.MAX_CHANNEL_COUNT
             logger.warning(
                 f"Max number of channels reached! Using first {max_channels} channels..."
