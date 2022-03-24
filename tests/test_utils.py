@@ -30,7 +30,7 @@ def test_config_default_values(config_data):
     assert config_data["output_type"] == "excel"
     assert config_data["output_file"] == "results.xlsx"
     assert config_data["url_column"] == 0
-    assert config_data["share_mail"] == "coskun.denize@gmail.com"
+    assert config_data["share_mail"] == "codenineeight@gmail.com"
     assert config_data["schedule"] == "NONE"
 
 

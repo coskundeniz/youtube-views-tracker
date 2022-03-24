@@ -57,7 +57,7 @@ def convert_interval(interval: str) -> ScheduleInterval:
     return scheduled_interval
 
 
-def setup_schedule(interval: str, task: Callable, task_args: "Namespace") -> None:
+def setup_schedule(interval: str, task: Callable, task_args: "Namespace") -> None:  # noqa: F821
     """Setup schedule for the script
 
     Raises UnsupportedScheduleOptionError if schedule setting fails.

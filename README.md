@@ -13,11 +13,6 @@ YouTube Views Tracker with Excel and Google Sheets Integration
 * Schedule for repeated runs
 * Run as Docker container
 
-
-https://stackoverflow.com/questions/261638/how-do-i-protect-python-code-from-being-read-by-users
-
-https://wiki.python.org/moin/Asking%20for%20Help/How%20do%20you%20protect%20Python%20source%20code%3F
-
 ---
 
 ## How to setup
@@ -88,7 +83,7 @@ optional arguments:
     * `python yt_views_tracker.py -f gsheets-video_urls -uc 2`
     * `python yt_views_tracker.py -f gsheets-https://docs.google.com/spreadsheets/d/1dtFZbg4Gm8mCopO9fpZ-DwJ37uLMopgLePgFdigutuI`
 
-* `yt_views_tracker.py -f ~/video_urls.txt -ot gsheets -of view_results`
+    * `python yt_views_tracker.py -f ~/video_urls.txt -ot gsheets -of view_results -sm codenineeight@gmail.com`
 
 * config.json example for channels
 
@@ -112,7 +107,7 @@ optional arguments:
 
 ### How to run Docker image
 
-* Run the following command first.
+* Run the following command first for once.
 
     * `docker run --rm -it -v view_results_volume:/src yt_views_tracker`
 
@@ -125,6 +120,8 @@ optional arguments:
 * Run the container by passing arguments as usual.
     * `docker run --rm -it -v view_results_volume:/src yt_views_tracker -f video_urls.txt`
     * `docker run --rm -it -v view_results_volume:/src yt_views_tracker -ch "https://www.youtube.com/c/ArjanCodes/"`
+    * `docker run --rm -it -v view_results_volume:/src yt_views_tracker -f gsheets-video_urls`
+    * `docker run --rm -it -v view_results_volume:/src yt_views_tracker -f video_urls.txt -ot gsheets -of view_results -sm codenineeight@gmail.com`
 
 * Copy the results to a different directory on the host device.
     * `sudo cp /var/lib/docker/volumes/view_results_volume/_data/results.xlsx ~/views_output`
@@ -156,7 +153,11 @@ or
     - 12 hours   (HOUR12)
     - Once a day at "HH:MM"
 
+* Run every 30 minutes
+    * `python yt_views_tracker.py -f video_urls.csv -s MIN30`
 
+* Run once a day at 15:30
+    * `python yt_views_tracker.py -f video_urls.csv -s 15:30`
 
 ---
 
@@ -169,6 +170,3 @@ or
 * `coverage run --omit *dist-packages* -m pytest -vs`
 * `coverage report --omit *dist-packages,yt_views_tracker.py*`
 * `coverage html --omit *dist-packages,yt_views_tracker.py*`
-
-
-# **TODO: check code to add some explanatory comments**

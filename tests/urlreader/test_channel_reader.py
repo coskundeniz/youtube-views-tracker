@@ -26,3 +26,19 @@ def test_read_urls_from_invalid_channel(capfd, channel_urls):
 
     assert len(urls) == 0
     assert f"Invalid channel url: {channel_urls[0] + 'xX'} Skipping..." in err
+
+
+def test_read_more_than_5_channels():
+
+    channels = [
+        "https://www.youtube.com/c/ArjanCodes/",
+        "https://www.youtube.com/user/coskundenize",
+        "https://www.youtube.com/user/kamurankolcak",
+        "https://www.youtube.com/c/LunngFern",
+        "https://www.youtube.com/c/Coreyms",
+        "https://www.youtube.com/channel/UCkeLTvg9Vxd-s4CJeNfxe6A",
+    ]
+
+    reader = ChannelReader(channels)
+
+    assert len(reader._channel_urls) == 5

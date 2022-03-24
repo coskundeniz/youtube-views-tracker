@@ -19,6 +19,9 @@ from utils import logger, get_configuration
 from yt_views import YoutubeViews
 
 
+__author__ = "Coşkun Deniz <codenineeight@gmail.com>"
+
+
 def handle_exception(exp: YTViewsTrackerException) -> None:
     """Print the error message and exit
 
@@ -70,7 +73,12 @@ def get_arg_parser() -> ArgumentParser:
     return arg_parser
 
 
-def main(args):
+def main(args) -> None:
+    """Entry point for the tool
+
+    :type args: Namespace
+    :pram args: Command line args returned by ArgumentParser
+    """
 
     if not (args.urlsfile or args.channels or args.useconfig):
         arg_parser.print_help()
@@ -118,8 +126,9 @@ if __name__ == "__main__":
                 setup_schedule(schedule_interval, main, args)
                 while True:
                     schedule.run_pending()
+
             except UnsupportedScheduleOptionError as exp:
                 handle_exception(exp)
 
     except KeyboardInterrupt:
-        logger.info("Program ended manually")
+        logger.info("Program ended manually.")

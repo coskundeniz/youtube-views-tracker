@@ -9,7 +9,7 @@ class ReporterFactory:
     """Factory class for url readers"""
 
     @staticmethod
-    def get_reporter(cmdline_args: "Namespace") -> reporter.Reporter:
+    def get_reporter(cmdline_args: "Namespace") -> reporter.Reporter:  # noqa: F821
         """Get specific reporter
 
         Raises UnsupportedOutputFileError if output format is not supported.
@@ -25,7 +25,6 @@ class ReporterFactory:
         config = get_configuration(cmdline_args.configfile)
 
         if cmdline_args.useconfig:
-
             output_type = config["output_type"]
             output_file = config["output_file"]
         else:
@@ -34,9 +33,11 @@ class ReporterFactory:
 
         if output_type == "excel":
             reporter = ExcelReporter(output_file)
+
         elif output_type == "gsheets":
             share_mail = config["share_mail"] if cmdline_args.useconfig else cmdline_args.share_mail
             reporter = GSheetsReporter(output_file, share_mail)
+
         else:
             message = "Unsupported output file! Should be one of excel, gsheets"
             raise UnsupportedOutputFileError(message)

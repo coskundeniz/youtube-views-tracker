@@ -14,8 +14,14 @@ class ChannelReader(UrlReader):
 
     def __init__(self, channel_urls: list[str]) -> None:
 
-        # TODO: get first 3 or 5 according to package
         self._channel_urls = channel_urls
+
+        if len(self._channel_urls) > 5:
+            max_channels = UrlReader.MAX_CHANNEL_COUNT
+            logger.warning(
+                f"Max number of channels reached! Using first {max_channels} channels..."
+            )
+            self._channel_urls = channel_urls[:max_channels]
 
     def read_urls(self) -> list[str]:
         """Extract video urls from given channels

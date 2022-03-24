@@ -77,6 +77,7 @@ class YoutubeViews:
 
         workers = 0
         num_urls = len(self._video_urls)
+
         if num_urls <= 100:
             workers = num_urls
         else:

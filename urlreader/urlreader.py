@@ -9,6 +9,7 @@ class UrlReader(ABC):
     """Base class for url readers"""
 
     MAX_URL_COUNT = 1000
+    MAX_CHANNEL_COUNT = 5
 
     @abstractmethod
     def read_urls(self) -> list:
