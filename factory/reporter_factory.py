@@ -1,7 +1,6 @@
 from exceptions import UnsupportedOutputFileError
 from reporter import reporter
 from reporter.excel_reporter import ExcelReporter
-from reporter.gsheets_reporter import GSheetsReporter
 from utils import get_configuration
 
 
@@ -34,12 +33,8 @@ class ReporterFactory:
         if output_type == "excel":
             reporter = ExcelReporter(output_file)
 
-        elif output_type == "gsheets":
-            share_mail = config["share_mail"] if cmdline_args.useconfig else cmdline_args.share_mail
-            reporter = GSheetsReporter(output_file, share_mail)
-
         else:
-            message = "Unsupported output file! Should be one of excel, gsheets"
+            message = "Unsupported output file! Should be excel"
             raise UnsupportedOutputFileError(message)
 
         return reporter

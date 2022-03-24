@@ -5,8 +5,6 @@ from factory.urlreader_factory import UrlReaderFactory
 from urlreader.txt_reader import TxtReader
 from urlreader.csv_reader import CsvReader
 from urlreader.xlsx_reader import ExcelReader
-from urlreader.gsheets_reader import GSheetsReader
-from urlreader.channel_reader import ChannelReader
 from yt_views_tracker import get_arg_parser
 
 
@@ -23,11 +21,6 @@ def config_data():
             "urlsfile": "tests/urlreader/urls_default.xlsx",
             "urlsfile_diff_column": "tests/urlreader/urls_diff_column.xlsx",
         },
-        "gsheets": {"urlsfile": "gsheets-video_urls_test"},
-        "channels": [
-            "https://www.youtube.com/c/ArjanCodes/",
-            "https://www.youtube.com/user/coskundenize",
-        ],
         "output_type": "excel",
         "output_file": "test_results.xlsx",
         "url_column": "0",
@@ -108,42 +101,3 @@ def test_get_urlreader_for_xlsx_diff_column(arg_parser, config_data):
 
     assert isinstance(reader, ExcelReader)
     assert reader._url_column == 1
-
-
-def test_get_urlreader_for_gsheets(arg_parser, config_data):
-
-    args = arg_parser.parse_args(["-f", config_data["gsheets"]["urlsfile"]])
-
-    reader = UrlReaderFactory.get_urlreader(args)
-
-    assert isinstance(reader, GSheetsReader)
-    assert reader._url_column == 0
-    assert reader._filename == config_data["gsheets"]["urlsfile"].split("-")[1]
-
-
-def test_get_urlreader_for_gsheets_diff_column(arg_parser, config_data):
-
-    args = arg_parser.parse_args(["-f", config_data["gsheets"]["urlsfile"], "-uc", "1"])
-
-    reader = UrlReaderFactory.get_urlreader(args)
-
-    assert isinstance(reader, GSheetsReader)
-    assert reader._url_column == 1
-
-
-def test_get_urlreader_for_channel(arg_parser, config_data):
-
-    args = arg_parser.parse_args(["-f", "", "-ch", config_data["channels"][1]])
-
-    reader = UrlReaderFactory.get_urlreader(args)
-
-    assert isinstance(reader, ChannelReader)
-
-
-def test_get_urlreader_for_channel_using_configfile(arg_parser):
-
-    args = arg_parser.parse_args(["--useconfig", "-cf", "tests/config_for_channels.json"])
-
-    reader = UrlReaderFactory.get_urlreader(args)
-
-    assert isinstance(reader, ChannelReader)

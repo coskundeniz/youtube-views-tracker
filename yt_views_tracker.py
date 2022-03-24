@@ -1,7 +1,5 @@
 from argparse import ArgumentParser
 
-import schedule
-
 from exceptions import (
     YTViewsTrackerException,
     UnsupportedUrlFileError,
@@ -10,12 +8,10 @@ from exceptions import (
     EmptyUrlListError,
     MissingShareMailError,
     UnsupportedConfigFileError,
-    UnsupportedScheduleOptionError,
 )
 from factory.urlreader_factory import UrlReaderFactory
 from factory.reporter_factory import ReporterFactory
-from scheduler import setup_schedule
-from utils import logger, get_configuration
+from utils import logger
 from yt_views import YoutubeViews
 
 
@@ -51,7 +47,6 @@ def get_arg_parser() -> ArgumentParser:
         help="Read configuration from given file",
     )
     arg_parser.add_argument("-f", "--urlsfile", help="File to read video urls")
-    arg_parser.add_argument("-ch", "--channels", help="Channel urls separated by comma")
     arg_parser.add_argument(
         "-ot", "--output_type", default="excel", help="Output file type (one of excel, gsheets)"
     )
@@ -62,12 +57,6 @@ def get_arg_parser() -> ArgumentParser:
         type=int,
         default=0,
         help="Url column index for csv, xlsx, or Google Sheets input",
-    )
-    arg_parser.add_argument(
-        "-sm", "--share_mail", help="Mail address to share Google Sheets document"
-    )
-    arg_parser.add_argument(
-        "-s", "--schedule", default="NONE", help="Interval to run as scheduled task"
     )
 
     return arg_parser
@@ -117,18 +106,5 @@ if __name__ == "__main__":
 
     try:
         main(args)
-
-        config = get_configuration(args.configfile)
-        schedule_interval = config["schedule"] if args.useconfig else args.schedule
-
-        if schedule_interval != "NONE":
-            try:
-                setup_schedule(schedule_interval, main, args)
-                while True:
-                    schedule.run_pending()
-
-            except UnsupportedScheduleOptionError as exp:
-                handle_exception(exp)
-
     except KeyboardInterrupt:
         logger.info("Program ended manually.")

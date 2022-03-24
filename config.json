@@ -1,12 +1,6 @@
 {
     "urlsfile": "/home/coskun/video_urls.txt",
-    "channels": [
-        "https://www.youtube.com/c/ArjanCodes/",
-        "https://www.youtube.com/user/coskundenize"
-    ],
     "output_type": "excel",
     "output_file": "results.xlsx",
-    "url_column": 0,
-    "share_mail": "codenineeight@gmail.com",
-    "schedule": "NONE"
+    "url_column": 0
 }
