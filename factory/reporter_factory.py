@@ -6,7 +6,7 @@ from utils import get_configuration
 
 
 class ReporterFactory:
-    """Factory class for url readers"""
+    """Factory class for reporters"""
 
     @staticmethod
     def get_reporter(cmdline_args: "Namespace") -> reporter.Reporter:  # noqa: F821
@@ -16,8 +16,8 @@ class ReporterFactory:
 
         :type cmdline_args: Namespace
         :param cmdline_args: Command line args returned by ArgumentParser
-        :rtype: urlreader.UrlReader
-        :returns: Concrete UrlReader object
+        :rtype: reporter.Reporter
+        :returns: Concrete Reporter object
         """
 
         reporter = None
