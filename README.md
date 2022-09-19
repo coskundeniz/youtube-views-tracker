@@ -15,6 +15,8 @@ The user can use either video URLs or channel links to track video counts.
 * Schedule for repeated runs
 * Run as Docker container
 
+See the user manual [here](https://github.com/coskundeniz/youtube-views-tracker/blob/main/docs/user_manual.pdf)
+
 ---
 
 ## How to setup
@@ -42,9 +44,9 @@ The user can use either video URLs or channel links to track video counts.
 
 ### Creating project on Google Cloud Console
 
-* https://docs.gspread.org/en/latest/oauth2.html
+1. Go to Google Developers Console and create a new project.
 
-1. Create a new project
+    https://console.cloud.google.com
 
 2. Enable "Google Drive API"
 
@@ -87,7 +89,7 @@ optional arguments:
 * For the most basic usage, the script requires at least one of “-c”, “-f”, or “-ch” options for config file, urls file and channel links respectively.
     * `python yt_views_tracker.py -c`
     * `python yt_views_tracker.py -f ~/video_urls.txt`
-    * `python yt_views_tracker.py -ch “https://www.youtube.com/c/ArjanCodes/”`
+    * `python yt_views_tracker.py -ch "https://www.youtube.com/c/ArjanCodes/"`
 
 Results are written to results.xlsx file by default in views, title, url order.
 Logs can be seen in the yt_views.log file in the project directory.
@@ -209,3 +211,5 @@ You can see the report by opening index.html file located under htmlcov folder i
 ## Support
 
 If you need support, you can contact me by emailing to codenineeight@gmail.com with the “yt_views_tracker” prefix in the subject. You can also see my Upwork profile [here](https://www.upwork.com/freelancers/~011e3fe44e575092f0).
+
+If you benefit from this tool, please consider donating using the sponsor links.
